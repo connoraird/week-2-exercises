@@ -9,12 +9,16 @@ using namespace std;
 int main()
 {
     // declare a department 
+    Department computerScience("Compter science");
 
     // declare a student
+    Student studentA("Student A");
 
     // set student's department
+    studentA.setDepartment(&computerScience);
 
     // add student to department list
+    computerScience.registerStudent(&studentA);
 
     return 0;
 }

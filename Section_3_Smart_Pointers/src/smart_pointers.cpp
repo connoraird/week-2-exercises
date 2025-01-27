@@ -25,6 +25,9 @@ class Reporter
 
 int main()
 {
+    Reporter* reporter_ptr = new Reporter("ptr");
+
+    Reporter reporter_unique("unique");
     
     return 0;
 }

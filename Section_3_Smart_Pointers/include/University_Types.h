@@ -1,6 +1,7 @@
 #include <memory>
 #include <iostream>
 #include <string>
+#include <map>
 
 using namespace std;
 
@@ -17,18 +18,20 @@ class Department;
 class Student
 {
     public:
-    Student(const std::string &n) : name(n), id(max_id++) {}
+    Student(const std::string &n);
 
-    ~Student()
-    {
-        cout << "Student " << name << " destroyed." << endl;
-    }
+    ~Student();
 
-    
+    int getId() const;
 
-    int getId() {return id;}
+    void setDepartment(Department* newDepartment);
 
-    private:
+    Student & operator=(const Student&) = delete;
+    Student & operator=(Student&) = delete;
+    Student(const Student&) = delete;
+    Student(Student&) = delete;
+
+private:
     // Static variable means same value shared by every object in class
     // This allows us to create a unique id for each student by increasing
     // each time
@@ -37,19 +40,27 @@ class Student
     string name;
     int id;
     // add a pointer to the department here
+    Department* department = nullptr;
 };
 
 class Department
 {
-    public:
-    Department(const std::string &n) : name(n) {}
+public:
+    Department(const std::string &n);
 
-    ~Department()
-    {
-        cout << "Department " << name << " destroyed." << endl;
-    }
+    ~Department();
 
-    private:
+    Department & operator=(const Department&) = delete;
+    Department & operator=(Department&) = delete;
+    Department(const Department&) = delete;
+    Department(Department&) = delete;
+
+    void registerStudent(Student* newStudent);
+
+    void deregisterStudent(Student* student);
+
+private:
     string name;
     // add a vector or map of pointers to students here
+    std::map<int, Student*> students;
 };
